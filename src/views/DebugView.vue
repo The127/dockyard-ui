@@ -3,7 +3,9 @@
 </script>
 
 <template>
-  Hello world!
+  <div class="bg-red-500">
+    Hello world!
+  </div>
 </template>
 
 <style scoped>
