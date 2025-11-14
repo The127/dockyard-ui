@@ -6,8 +6,22 @@ import {Cog, Folders, Users} from "lucide-vue-next";
 import BurgerMenuItem from "./BugerMenuItem.vue";
 import HeadingText from "./HeadingText.vue";
 import {useRoute} from "vue-router";
+import {useUserManager} from "../composables/userManager.js";
+import {ref, watchEffect} from "vue";
+import { User } from "lucide-vue-next";
 
 const route = useRoute()
+const user = ref(null)
+
+watchEffect(async () => {
+  if (!route.params.tenant) {
+    return
+  }
+
+  const userMgr = await useUserManager(route.params.tenant);
+  user.value = await userMgr.getUser()
+})
+
 </script>
 
 <template>
@@ -41,15 +55,15 @@ const route = useRoute()
     </BurgerMenuItemGroup>
 
     <div class="p-2 border-t border-t-slate-200 mt-2">
-      <div class="p-2 bg-offwhite rounded-md flex flex-row items-center gap-2">
-        <div class="rounded-full w-12 h-12 bg-slate-200 font-semibold text-sm justify-center items-center flex overflow-hidden">
+      <div class="p-2 bg-offwhite rounded-md flex flex-row items-center gap-2" v-if="user">
+        <div class="rounded-full bg-slate-200 font-semibold text-sm justify-center items-center flex overflow-hidden size-12">
           <div class="flex items-center justify-center">
-            KK
+            <User/>
           </div>
         </div>
         <div class="flex flex-col overflow-hidden">
-          <span>Karolin Kostial</span>
-          <span class="text-xs text-slate-400 text-nowrap text-ellipsis overflow-hidden">ba78ef2d-3e98-451d-9f96-eb0a7fc36c3easdasd</span>
+          <span class="text-nowrap text-ellipsis overflow-hidden">{{ user.profile.name }}</span>
+          <span class="text-xs text-slate-400 text-nowrap text-ellipsis overflow-hidden">{{ user.profile.sub }}</span>
         </div>
       </div>
     </div>
