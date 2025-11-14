@@ -5,6 +5,9 @@ import BurgerMenuHeading from "./components/BurgerMenuHeading.vue";
 import BurgerMenuItem from "./components/BugerMenuItem.vue";
 import BurgerMenuItemGroup from "./components/BurgerMenuItemGroup.vue";
 import HeadingText from "./components/HeadingText.vue";
+import {useRoute} from "vue-router";
+
+const route = useRoute()
 
 </script>
 
@@ -19,7 +22,7 @@ import HeadingText from "./components/HeadingText.vue";
         <BurgerMenuHeading>
           Administration
         </BurgerMenuHeading>
-        <BurgerMenuItem :to="{name: 'tenant-overview'}">
+        <BurgerMenuItem v-if="route.params.tenant" :to="{name: 'tenant-overview'}">
           <Users class="w-4"/> Tenants
         </BurgerMenuItem>
       </BurgerMenuItemGroup>
@@ -28,13 +31,13 @@ import HeadingText from "./components/HeadingText.vue";
         <BurgerMenuHeading>
           General
         </BurgerMenuHeading>
-        <BurgerMenuItem :to="{name: 'project-overview'}">
+        <BurgerMenuItem v-if="route.params.tenant" :to="{name: 'project-overview'}">
           <Folders class="w-4"/> Projects
         </BurgerMenuItem>
       </BurgerMenuItemGroup>
 
       <BurgerMenuItemGroup class="flex-1 justify-end">
-        <BurgerMenuItem :to="{name: 'settings'}">
+        <BurgerMenuItem v-if="route.params.tenant" :to="{name: 'settings'}">
           <Cog class="w-4"/> Settings
         </BurgerMenuItem>
       </BurgerMenuItemGroup>

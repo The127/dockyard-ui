@@ -1,8 +1,11 @@
 <script setup>
 
 import {useListProjectsQuery} from "../../api/regular/projects.js";
+import {useRoute} from "vue-router";
 
-const { data } = useListProjectsQuery("raccoons")
+const route = useRoute()
+
+const { data } = useListProjectsQuery(route.params.tenant)
 
 </script>
 
