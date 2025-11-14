@@ -92,7 +92,6 @@ const authGuard = async (to, from, next) => {
         return
     }
 
-    console.log("auth")
     const mgr = await useUserManager(to.params.tenant)
     if (await mgr.getUser() !== null) {
         next()

@@ -8,8 +8,6 @@ export async function useUserManager(tenantSlug) {
     if (!managers[tenantSlug]) {
         const oidcConfig = await apiFetch(ConfigApiUrl() + `/api/v1/tenants/${tenantSlug}/oidc`)
 
-        console.log(oidcConfig)
-
         managers[tenantSlug] = new UserManager({
             authority: oidcConfig.issuer,
             client_id: oidcConfig.client,
