@@ -26,7 +26,7 @@ watchEffect(async () => {
 
 <template>
   <div class="flex flex-col not-dark:bg-slate-100 dark:bg-slate-800 border-r not-dark:border-r-slate-200 dark:border-r-slate-600 p-2 gap-2 min-w-xs max-w-xs w-xs">
-    <div class="p-2 border-b not-dark:border-b-slate-200 dark:border-b-slate-600">
+    <div class="flex items-center h-16 p-2 border-b not-dark:border-b-slate-200 dark:border-b-slate-600">
       <HeadingText class="not-dark:text-cyan-800 dark:text-cyan-200"><router-link v-if="route.params.tenant" :to="{name: 'home'}">dockyard</router-link></HeadingText>
     </div>
 
