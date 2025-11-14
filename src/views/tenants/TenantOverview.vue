@@ -1,8 +1,8 @@
 <script setup>
 
-import {useGetTenantQuery, useListTenantsQuery} from "../../api/tenants.js";
+import {useListTenantsQuery} from "../../api/admin/tenants.js";
 
-const { data } = useListTenantsQuery()
+const {data} = useListTenantsQuery()
 
 </script>
 

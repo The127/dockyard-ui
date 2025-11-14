@@ -1,5 +1,5 @@
-import {ConfigApiUrl} from "../config.js";
-import {apiFetch} from "./index.js";
+import {ConfigApiUrl} from "../../config.js";
+import {apiFetch} from "../index.js";
 import {useQuery} from "@tanstack/vue-query";
 
 export const useListTenantsQuery = () => useQuery({
