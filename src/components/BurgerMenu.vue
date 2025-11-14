@@ -27,7 +27,7 @@ watchEffect(async () => {
 <template>
   <div class="flex flex-col bg-slate-100 border-r border-r-slate-200 p-2 gap-2 min-w-xs max-w-xs w-xs">
     <div class="p-2 border-b border-b-slate-200">
-      <HeadingText>dockyard</HeadingText>
+      <HeadingText class="text-cyan-800"><router-link v-if="route.params.tenant" :to="{name: 'home'}">dockyard</router-link></HeadingText>
     </div>
 
     <BurgerMenuItemGroup>
