@@ -1,16 +1,14 @@
 <script setup>
-
-import {useRoute} from "vue-router";
 import BurgerMenu from "./components/BurgerMenu.vue";
 
 </script>
 
 <template>
   <Suspense>
-    <div class="flex flex-row h-screen w-screen">
+    <div class="flex flex-row h-screen w-screen not-dark:text-black dark:text-white">
       <BurgerMenu/>
 
-      <div class="flex-1 bg-offwhite p-4">
+      <div class="flex-1 not-dark:bg-offwhite dark:bg-slate-700 p-4">
         <div class="">
           TODO: search
         </div>
