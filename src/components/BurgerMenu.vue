@@ -55,7 +55,7 @@ watchEffect(async () => {
     </BurgerMenuItemGroup>
 
     <div class="p-2 border-t not-dark:border-t-slate-200 dark:border-t-slate-600 mt-2">
-      <div class="p-2 not-dark:bg-offwhite dark:bg-slate-900 rounded-md flex flex-row items-center gap-2" v-if="user">
+      <div class="p-2 mt-2 not-dark:bg-offwhite dark:bg-slate-900 rounded-md flex flex-row items-center gap-2" v-if="user">
         <div class="rounded-full not-dark:bg-slate-200 dark:bg-slate-600 font-semibold text-sm justify-center items-center flex overflow-hidden size-12">
           <div class="flex items-center justify-center">
             <User/>
