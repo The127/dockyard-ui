@@ -11,7 +11,11 @@ const dataQuery = () => useListTenantsQuery()
 
 <template>
   <PageLayout>
-    <PageHeader title="Tenants" subtitle="Manage the tenants in this installation of dockyard."/>
+    <PageHeader title="Tenants" subtitle="Manage the tenants in this installation of dockyard.">
+      <template #actions>
+        asd
+      </template>
+    </PageHeader>
     <DataList :query="dataQuery" :on-click="() => {}">
       <template #row="{item}">
         {{ item }}
