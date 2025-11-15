@@ -56,8 +56,9 @@ onMounted(async () => {
          @click="select(tab)"
         :data-active="tab.active ? true : null"
          class="font-semibold ease-linear px-2 py-1 border-b-2
-            [[data-active]]:text-cyan-600 [[data-active]]:border-b-cyan-600
-            hover:text-slate-500 cursor-pointer
+            [[data-active]]:not-dark:text-cyan-600 [[data-active]]:not-dark:border-b-cyan-600
+            [[data-active]]:dark:text-cyan-200 [[data-active]]:dark:border-b-cyan-200
+            hover:not-dark:text-slate-500 hover:dark:text-slate-400 cursor-pointer
             border-b-slate-300"
     >
       {{ tab.title }}
