@@ -24,7 +24,7 @@ const openCreateModal = () => {
   <PageLayout>
     <PageHeader title="Tenants" subtitle="Manage the tenants in this installation of dockyard.">
       <template #actions>
-        <ButtonComponent variant="special" text="Create" @click="openCreateModal"/>
+        <ButtonComponent text="Create" @click="openCreateModal"/>
       </template>
     </PageHeader>
     <DataList :query="dataQuery">
