@@ -43,7 +43,7 @@ const onSubmit = async () => {
       @submit.prevent="onSubmit"
   >
     <slot name="header">
-      <HeadingText :id="headingId" level="h3">{{ title }}</HeadingText>
+      <HeadingText :id="headingId" level="h3" class="not-dark:text-cyan-800 dark:text-cyan-200">{{ title }}</HeadingText>
     </slot>
 
     <slot/>

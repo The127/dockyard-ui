@@ -2,11 +2,11 @@
 const variants = {
     intent: {
         primary: [
-            "border-slate-900",
-            "bg-slate-900",
+            "border-cyan-800",
+            "bg-cyan-800",
             "hover:bg-transparent",
-            "text-slate-100",
-            "not-dark:hover:text-slate-900",
+            "text-offwhite",
+            "not-dark:hover:text-cyan-800 dark:hover:text-cyan-200",
             "hover:inset-shadow-xs",
         ],
         secondary: [
