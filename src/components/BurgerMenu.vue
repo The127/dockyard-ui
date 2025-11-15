@@ -7,11 +7,14 @@ import BurgerMenuItem from "./BugerMenuItem.vue";
 import HeadingText from "./HeadingText.vue";
 import {useRoute} from "vue-router";
 import {useUserManager} from "../composables/userManager.js";
-import {ref, watchEffect} from "vue";
+import {markRaw, ref, watchEffect} from "vue";
 import { User } from "lucide-vue-next";
+import {useClipboard} from "../composables/clipboard.js";
 
 const route = useRoute()
 const user = ref(null)
+
+const clipboard = useClipboard()
 
 watchEffect(async () => {
   if (!route.params.tenant) {
@@ -62,8 +65,20 @@ watchEffect(async () => {
           </div>
         </div>
         <div class="flex flex-col overflow-hidden">
-          <span class="text-nowrap text-ellipsis overflow-hidden">{{ user.profile.name }}</span>
-          <span class="text-xs not-dark:text-slate-400 dark:text-slate-500 text-nowrap text-ellipsis overflow-hidden">{{ user.profile.sub }}</span>
+          <span
+              class="text-nowrap text-ellipsis overflow-hidden cursor-pointer"
+              :title="user.profile.name"
+              @click="clipboard.writeText(user.profile.name)"
+          >
+            {{ user.profile.name }}
+          </span>
+          <span
+              class="text-xs not-dark:text-slate-400 dark:text-slate-500 text-nowrap text-ellipsis overflow-hidden cursor-pointer"
+              :title="user.profile.sub"
+              @click="clipboard.writeText(user.profile.sub)"
+          >
+            {{ user.profile.sub }}
+          </span>
         </div>
       </div>
     </div>
