@@ -19,7 +19,7 @@ const { data, isPending, isFetching, } = props.query()
 </script>
 
 <template>
-  <div>
+  <div class="flex flex-col gap-2">
     <template v-if="!!data">
       <template v-if="data?.items?.length === 0">
         <slot name="no-data">
