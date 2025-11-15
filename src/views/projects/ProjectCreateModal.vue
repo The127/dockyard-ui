@@ -18,11 +18,13 @@ const modal = ref(null)
 const formModel = reactive({
   slug: '',
   name: '',
+  description: '',
 })
 
 const formRules = {
   slug: {required,},
-  name: {required,},
+  name: {},
+  description: {},
 }
 
 const v$ = useVuelidate(formRules, formModel)
@@ -30,6 +32,7 @@ const v$ = useVuelidate(formRules, formModel)
 const open = () => {
   formModel.slug = ''
   formModel.name = ''
+  formModel.description = ''
 
   v$.value.$reset()
 
@@ -49,6 +52,7 @@ const createProject = async () => {
     await createProjectMutation.mutateAsync({
       slug: formModel.slug,
       displayName: formModel.name,
+      description: formModel.description,
     })
 
     toast.success('Project created')
@@ -81,8 +85,13 @@ const createProject = async () => {
           label="Name"
           v-model="v$.name.$model"
           :vuelidate="v$.name"
-          required
           helper-text="The display name of the project."
+      />
+      <InputComponent
+          label="Description"
+          v-model="v$.description.$model"
+          :vuelidate="v$.description"
+          helper-text="A short description of the project."
       />
     </FormComponent>
   </ModalPopup>
