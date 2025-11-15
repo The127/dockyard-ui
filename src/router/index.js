@@ -7,6 +7,7 @@ const routes = [
         name: 'home-root',
         meta: {
             requiresAuth: true,
+            breadcrumbFn: () => "Home",
         },
         children: [
             {
@@ -44,12 +45,18 @@ const routes = [
                         path: '',
                         name: 'tenant-overview',
                         component: () => import('../views/tenants/TenantOverview.vue'),
+                        meta: {
+                            breadcrumbFn: () => "Tenants",
+                        },
                     },
                 ],
             },
             {
                 path: 'projects',
                 name: 'project-overview-root',
+                meta: {
+                    breadcrumbFn: () => "Projects",
+                },
                 children: [
                     {
                         path: '',
@@ -59,11 +66,38 @@ const routes = [
                     {
                         path: ':project',
                         name: 'project-details-root',
+                        meta: {
+                            breadcrumbFn: () => "Details",
+                        },
                         children: [
                             {
                                 path: '',
                                 name: 'project-details',
                                 component: () => import('../views/projects/details/ProjectDetails.vue'),
+                            },
+                            {
+                                path: 'repositories',
+                                name: 'project-repositories',
+                                meta: {
+                                    breadcrumbNoLink: true,
+                                    breadcrumbFn: () => "Repositories",
+                                },
+                                children: [
+                                    {
+                                        path: ':repository',
+                                        name: 'repository-details-root',
+                                        meta: {
+                                            breadcrumbFn: () => "Details",
+                                        },
+                                        children: [
+                                            {
+                                                path: '',
+                                                name: 'repository-details',
+                                                component: () => import('../views/projects/details/repositories/RepositoryDetails.vue'),
+                                            },
+                                        ],
+                                    }
+                                ],
                             },
                         ],
                     },
