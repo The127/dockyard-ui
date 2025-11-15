@@ -15,6 +15,19 @@ export const listRepositoriesQueryFn = async (tenantSlug, projectSlug) => {
     return await apiFetch(url.toString())
 }
 
+export const useGetRepositoryQuery = (tenantSlug, projectSlug, repositorySlug) => useQuery({
+    queryKey: ['repositories', tenantSlug, projectSlug, repositorySlug],
+    queryFn: () =>  getRepositoryQueryFn(tenantSlug, projectSlug, repositorySlug)
+})
+
+export const getRepositoryQueryFn = async (tenantSlug, projectSlug, repositorySlug) => {
+    const url = new URL(
+        ConfigApiUrl() + `/api/v1/tenants/${tenantSlug}/projects/${projectSlug}/repositories/${repositorySlug}`
+    )
+
+    return await apiFetch(url.toString())
+}
+
 export const useCreateRepositoryMutation = (tenantSlug, projectSlug) => {
     const queryClient = useQueryClient()
     return useMutation({

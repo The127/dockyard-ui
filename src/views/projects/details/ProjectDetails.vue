@@ -6,8 +6,14 @@ import TabLayout from "../../../components/TabLayout.vue";
 import TabPage from "../../../components/TabPage.vue";
 import RepositoriesTab from "./RepositoriesTab.vue";
 import ButtonComponent from "../../../components/ButtonComponent.vue";
-import {ref} from "vue";
+import {computed, ref} from "vue";
 import RepositoryCreateModal from "./RepositoryCreateModal.vue";
+import {useRoute} from "vue-router";
+import {useGetProjectQuery} from "../../../api/regular/projects.js";
+
+const route = useRoute()
+
+const { data } = useGetProjectQuery(route.params.tenant, route.params.project)
 
 const createModal = ref(null)
 
@@ -21,7 +27,10 @@ const openCreateModal = () => {
   <RepositoryCreateModal ref="createModal"/>
 
   <PageLayout>
-    <PageHeader title="Details" subtitle="Manage the stuff.">
+    <PageHeader
+        :title="data?.displayName"
+        :subtitle="data?.description ? data.description : 'Manage the project.'"
+    >
       <template #actions>
         <ButtonComponent text="Create" @click="openCreateModal"/>
       </template>
