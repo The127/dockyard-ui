@@ -1,15 +1,17 @@
 <script setup>
 
-import ModalPopup from "../../components/ModalPopup.vue";
-import {reactive, ref} from "vue";
-import FormComponent from "../../components/FormComponent.vue";
-import {required} from "@vuelidate/validators";
-import useVuelidate from "@vuelidate/core";
-import InputComponent from "../../components/InputComponent.vue";
-import {useCreateTenantMutation} from "../../api/admin/tenants.js";
 import {useToast} from "../../composables/toast.js";
+import {reactive, ref, watchEffect} from "vue";
+import useVuelidate from "@vuelidate/core";
+import {useCreateProjectMutation} from "../../api/regular/projects.js";
+import {useRoute} from "vue-router";
+import {required} from "@vuelidate/validators";
+import ModalPopup from "../../components/ModalPopup.vue";
+import FormComponent from "../../components/FormComponent.vue";
+import InputComponent from "../../components/InputComponent.vue";
 import FormGroup from "../../components/FormGroup.vue";
 
+const route = useRoute()
 const toast = useToast()
 
 const modal = ref(null)
@@ -17,15 +19,11 @@ const modal = ref(null)
 const formModel = reactive({
   slug: '',
   name: '',
-  oidcClient: '',
-  oidcIssuer: '',
 })
 
 const formRules = {
   slug: {required,},
   name: {required,},
-  oidcClient: {required,},
-  oidcIssuer: {required,},
 }
 
 const v$ = useVuelidate(formRules, formModel)
@@ -33,8 +31,6 @@ const v$ = useVuelidate(formRules, formModel)
 const open = () => {
   formModel.slug = ''
   formModel.name = ''
-  formModel.oidcClient = ''
-  formModel.oidcIssuer = ''
 
   v$.value.$reset()
 
@@ -45,21 +41,21 @@ defineExpose({
   open,
 })
 
-const createTenantMutation = useCreateTenantMutation()
+const createProjectMutation = useCreateProjectMutation(
+    route.params.tenant,
+)
 
-const createTenant = async () => {
+const createProject = async () => {
   try {
-    await createTenantMutation.mutateAsync({
+    await createProjectMutation.mutateAsync({
       slug: formModel.slug,
       displayName: formModel.name,
-      oidcClient: formModel.oidcClient,
-      oidcIssuer: formModel.oidcIssuer,
     })
 
-    toast.success('Tenant created')
+    toast.success('Project created')
   } catch (e) {
     console.error(e)
-    toast.error('Failed to create tenant')
+    toast.error('Failed to create project')
   }
 
   modal.value.close()
@@ -70,10 +66,10 @@ const createTenant = async () => {
 <template>
   <ModalPopup ref="modal">
     <FormComponent
-        title="Create a tenant"
-        @submit="createTenant"
+        title="Create a project"
+        @submit="createProject"
         :vuelidate="v$"
-        submit-text="Create tenant"
+        submit-text="Create project"
     >
       <InputComponent
           label="Slug"
@@ -89,22 +85,6 @@ const createTenant = async () => {
           required
           helper-text="The display name of the tenant."
       />
-      <FormGroup title="OIDC">
-        <InputComponent
-            label="Client"
-            v-model="v$.oidcClient.$model"
-            :vuelidate="v$.oidcClient"
-            required
-            helper-text="The oidc client id of the tenant."
-        />
-        <InputComponent
-            label="Issuer"
-            v-model="v$.oidcIssuer.$model"
-            :vuelidate="v$.oidcIssuer"
-            required
-            helper-text="The oidc issuer url of the tenant."
-        />
-      </FormGroup>
     </FormComponent>
   </ModalPopup>
 </template>

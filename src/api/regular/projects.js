@@ -1,6 +1,6 @@
 import {ConfigApiUrl} from "../../config.js";
 import {apiFetch} from "../index.js";
-import {useQuery} from "@tanstack/vue-query";
+import {useMutation, useQuery, useQueryClient} from "@tanstack/vue-query";
 
 export const useListProjectsQuery = (tenantSlug) => useQuery({
     queryKey: ['projects'],
@@ -26,4 +26,25 @@ export const getProjectQueryFn = async (tenantSlug, projectSlug) => {
     )
 
     return await apiFetch(url.toString())
+}
+
+export const useCreateProjectMutation = (tenantSlug) => {
+    const queryClient = useQueryClient()
+    return useMutation({
+        mutationFn: (data) => createProjectMutationFn(tenantSlug, data),
+        onSuccess: () => {
+            queryClient.invalidateQueries(['projects'])
+        },
+    })
+}
+
+export const createProjectMutationFn = async (tenantSlug, data) => {
+    const url = new URL(
+        ConfigApiUrl() + `/api/v1/tenants/${tenantSlug}/projects`
+    )
+
+    return await apiFetch(url.toString(), {
+        method: 'POST',
+        body: data,
+    })
 }
