@@ -74,14 +74,14 @@ watchEffect(async () => {
           <span
               class="text-nowrap text-ellipsis overflow-hidden cursor-pointer"
               :title="user.profile.name"
-              @click="clipboard.writeText(user.profile.name)"
+              @click="clipboard.writeText(user.profile.name, 'username')"
           >
             {{ user.profile.name }}
           </span>
           <span
               class="text-xs not-dark:text-slate-400 dark:text-slate-500 text-nowrap text-ellipsis overflow-hidden cursor-pointer"
               :title="user.profile.sub"
-              @click="clipboard.writeText(user.profile.sub)"
+              @click="clipboard.writeText(user.profile.sub, 'subject')"
           >
             {{ user.profile.sub }}
           </span>
