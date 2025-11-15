@@ -56,6 +56,17 @@ const routes = [
                         name: 'project-overview',
                         component: () => import('../views/projects/ProjectOverview.vue'),
                     },
+                    {
+                        path: ':project',
+                        name: 'project-details-root',
+                        children: [
+                            {
+                                path: '',
+                                name: 'project-details',
+                                component: () => import('../views/projects/details/ProjectDetails.vue'),
+                            },
+                        ],
+                    },
                 ],
             },
             {

@@ -1,7 +1,7 @@
 <script setup>
 
 import {useListProjectsQuery} from "../../api/regular/projects.js";
-import {useRoute} from "vue-router";
+import {useRoute, useRouter} from "vue-router";
 import PageLayout from "../../components/PageLayout.vue";
 import PageHeader from "../../components/PageHeader.vue";
 import DataList from "../../components/DataList.vue";
@@ -10,6 +10,7 @@ import ProjectCreateModal from "./ProjectCreateModal.vue";
 import ButtonComponent from "../../components/ButtonComponent.vue";
 
 const route = useRoute()
+const router = useRouter()
 
 const dataQuery = () => useListProjectsQuery(route.params.tenant)
 
@@ -17,6 +18,13 @@ const createModal = ref(null)
 
 const openCreateModal = () => {
   createModal.value.open()
+}
+
+const navigateToProjectDetails = (project) => {
+  router.push({
+    name: 'project-details',
+    params: {...route.params, project: project.slug,}
+  })
 }
 
 </script>
@@ -30,7 +38,7 @@ const openCreateModal = () => {
         <ButtonComponent text="Create" @click="openCreateModal"/>
       </template>
     </PageHeader>
-    <DataList :query="dataQuery">
+    <DataList :query="dataQuery" :on-click="navigateToProjectDetails">
       <template #row="{item}">
         {{ item }}
       </template>
