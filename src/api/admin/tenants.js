@@ -1,6 +1,6 @@
 import {ConfigApiUrl} from "../../config.js";
 import {apiFetch} from "../index.js";
-import {useQuery} from "@tanstack/vue-query";
+import {useMutation, useQuery, useQueryClient} from "@tanstack/vue-query";
 
 export const useListTenantsQuery = () => useQuery({
     queryKey: ['tenants'],
@@ -26,4 +26,25 @@ export const getTenantQueryFn = async (tenantSlug) => {
     )
 
     return await apiFetch(url.toString())
+}
+
+export const useCreateTenantMutation = () => {
+    const queryClient = useQueryClient()
+    return useMutation({
+        mutationFn: (data) => createTenantMutationFn(data),
+        onSuccess: () => {
+            queryClient.invalidateQueries(['tenants'])
+        },
+    })
+}
+
+export const createTenantMutationFn = async (data) => {
+    const url = new URL(
+        ConfigApiUrl() + `/admin/api/v1/tenants`
+    )
+
+    return await apiFetch(url.toString(), {
+        method: 'POST',
+        body: data,
+    })
 }
