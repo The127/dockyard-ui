@@ -10,6 +10,7 @@ import {useUserManager} from "../composables/userManager.js";
 import {markRaw, ref, watchEffect} from "vue";
 import { User } from "lucide-vue-next";
 import {useClipboard} from "../composables/clipboard.js";
+import DockyardIcon from "./DockyardIcon.vue";
 
 const route = useRoute()
 const user = ref(null)
@@ -30,7 +31,12 @@ watchEffect(async () => {
 <template>
   <div class="flex flex-col not-dark:bg-slate-100 dark:bg-slate-800 border-r not-dark:border-r-slate-200 dark:border-r-slate-600 p-2 gap-2 min-w-xs max-w-xs w-xs">
     <div class="flex items-center h-16 p-2 border-b not-dark:border-b-slate-200 dark:border-b-slate-600">
-      <HeadingText class="not-dark:text-cyan-800 dark:text-cyan-200"><router-link v-if="route.params.tenant" :to="{name: 'home'}">dockyard</router-link></HeadingText>
+      <router-link v-if="route.params.tenant" :to="{name: 'home'}">
+        <div class="flex flex-row items-center gap-2">
+          <DockyardIcon class="size-12"/>
+          <span class="not-dark:text-cyan-800 dark:text-cyan-200 text-3xl">dockyard</span>
+        </div>
+      </router-link>
     </div>
 
     <BurgerMenuItemGroup>
