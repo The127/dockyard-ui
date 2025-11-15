@@ -3,16 +3,20 @@
 import {useListTenantsQuery} from "../../api/admin/tenants.js";
 import PageLayout from "../../components/PageLayout.vue";
 import PageHeader from "../../components/PageHeader.vue";
+import DataList from "../../components/DataList.vue";
 
-const {data} = useListTenantsQuery()
+const dataQuery = () => useListTenantsQuery()
 
 </script>
 
 <template>
   <PageLayout>
     <PageHeader title="Tenants" subtitle="Manage the tenants in this installation of dockyard."/>
-    tenants:
-    {{ data }}
+    <DataList :query="dataQuery" :on-click="() => {}">
+      <template #row="{item}">
+        {{ item }}
+      </template>
+    </DataList>
   </PageLayout>
 </template>
 
