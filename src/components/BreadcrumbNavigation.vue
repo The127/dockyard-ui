@@ -19,7 +19,6 @@ watchEffect(async () => {
 
       // resolve path with current params
       let to = null;
-      console.log(item)
       if (item.name && !item.meta.breadcrumbNoLink) {
         to = router.resolve({
           name: item.name,

@@ -113,7 +113,6 @@ const routes = [
 ]
 
 async function handleLoginCallback(route) {
-    console.log("login callback")
     const mgr = await useUserManager(route.params.tenant)
     const user = await mgr.signinRedirectCallback()
     return user.state.destination;
