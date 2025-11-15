@@ -40,7 +40,20 @@ const navigateToProjectDetails = (project) => {
     </PageHeader>
     <DataList :query="dataQuery" :on-click="navigateToProjectDetails">
       <template #row="{item}">
-        {{ item }}
+        <div class="flex flex-col">
+          <div class="flex flex-row gap-2 justify-between">
+            <div class="flex flex-col gap-1">
+              <span class="font-semibold">{{ item.displayName }}</span>
+              <span class="font-light text-sm">{{ item.slug }}</span>
+            </div>
+            <div>
+              TODO: stats
+            </div>
+          </div>
+          <div>
+            <span class="">{{ item.description }}</span>
+          </div>
+        </div>
       </template>
     </DataList>
   </PageLayout>
