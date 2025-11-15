@@ -73,7 +73,7 @@ const hasError = computed(() => !!props.vuelidate && props.vuelidate.$error)
         :placeholder="placeholderValue"
         v-bind="$attrs"
     />
-    <span class="not-dark:text-red-700 dark:text-red-300 text-xs" v-if="hasError">
+    <span class="text-red-600 text-xs" v-if="hasError">
       {{ vuelidate.$errors[0].$message }}
     </span>
     <span class="not-dark:text-slate-500 dark:text-slate-400 text-xs" v-if="helperText">

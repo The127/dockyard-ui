@@ -33,12 +33,12 @@ defineExpose({
 <template>
   <dialog
       ref="el"
-      class="fixed inset-0 max-h-none max-w-none size-auto bg-transparent backdrop-blur-xs"
+      class="fixed inset-0 max-h-none max-w-none size-auto bg-transparent backdrop-blur-xs not-dark:text-black dark:text-white"
       @click="close"
   >
     <div class="flex flex-col items-center justify-center h-screen w-screen">
       <div
-          class="rounded-2xl shadow-xl p-5 bg-offwhite w-64 sm:64"
+          class="rounded-2xl shadow-xl p-5 not-dark:bg-offwhite dark:bg-slate-700 w-64 sm:64"
           :class="{'md:w-128': size === 'md', 'lg:w-256 md:w-128': size === 'lg'}"
           @click.stop
       >
