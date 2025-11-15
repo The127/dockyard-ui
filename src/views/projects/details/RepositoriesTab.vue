@@ -21,7 +21,19 @@ const navigateToRepository = (repository) => {
 <template>
   <DataList :query="dataQuery" :on-click="navigateToRepository">
     <template #row="{item}">
-      {{ item }}
+      <div class="flex flex-col">
+        <div class="flex flex-row gap-2 justify-between">
+          <div class="flex flex-col gap-1">
+            <span class="font-semibold">{{ item.displayName }}</span>
+          </div>
+          <div>
+            TODO: stats
+          </div>
+        </div>
+        <div>
+          <span>{{ item.description }}</span>
+        </div>
+      </div>
     </template>
   </DataList>
 </template>

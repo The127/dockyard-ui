@@ -17,19 +17,19 @@ const modal = ref(null)
 
 const formModel = reactive({
   slug: '',
-  name: '',
+  description: '',
 })
 
 const formRules = {
   slug: {required,},
-  name: {required,},
+  description: {},
 }
 
 const v$ = useVuelidate(formRules, formModel)
 
 const open = () => {
   formModel.slug = ''
-  formModel.name = ''
+  formModel.description = ''
 
   v$.value.$reset()
 
@@ -49,7 +49,7 @@ const createRepository = async () => {
   try{
     await createRepositoryMutation.mutateAsync({
       slug: formModel.slug,
-      displayName: formModel.name,
+      description: formModel.description,
     })
 
     toast.success('Repository created')
@@ -79,11 +79,10 @@ const createRepository = async () => {
           helper-text="The slug of the repository. Must be unique in the project."
       />
       <InputComponent
-          label="Name"
-          v-model="v$.name.$model"
-          :vuelidate="v$.name"
-          required
-          helper-text="The display name of the repository."
+          label="Description"
+          v-model="v$.description.$model"
+          :vuelidate="v$.description"
+          helper-text="A short description of the repository."
       />
     </FormComponent>
   </ModalPopup>
