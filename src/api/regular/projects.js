@@ -33,7 +33,7 @@ export const useCreateProjectMutation = (tenantSlug) => {
     return useMutation({
         mutationFn: (data) => createProjectMutationFn(tenantSlug, data),
         onSuccess: () => {
-            queryClient.invalidateQueries(['projects'])
+            queryClient.invalidateQueries(['projects', tenantSlug])
         },
     })
 }
