@@ -75,7 +75,7 @@ const decodedContent = (contentBase64) => {
     </div>
   </template>
   <template v-else-if="data?.contentBase64">
-    <MdPreview :id="viewerId" :modelValue="decodedContent(data.contentBase64)"/>
+    <MdPreview :id="viewerId" :modelValue="decodedContent(data.contentBase64)" language="en-US"/>
     <ButtonComponent variant="link" size="sm" text="Edit" @click="onEdit">
       <template #adornment>
         <Pencil class="size-4"/>
