@@ -15,6 +15,7 @@
     "@vuelidate/validators": "^2.0.4",
     "class-variance-authority": "^0.7.1",
     "lucide-vue-next": "^0.553.0",
+    "md-editor-v3": "^6.1.1",
     "oidc-client-ts": "^3.4.0",
     "tailwindcss": "^4.1.17",
     "vue": "^3.5.24",

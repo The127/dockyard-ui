@@ -7,6 +7,7 @@ import {useGetRepositoryQuery} from "../../../../api/regular/repositories.js";
 import TabLayout from "../../../../components/TabLayout.vue";
 import TabPage from "../../../../components/TabPage.vue";
 import TagsTab from "./TagsTab.vue";
+import OverviewTab from "./OverviewTab.vue";
 
 const route = useRoute()
 
@@ -26,7 +27,7 @@ const { data } = useGetRepositoryQuery(
     />
     <TabLayout>
       <TabPage title="Overview" name="overview">
-        TODO: overview
+        <OverviewTab/>
       </TabPage>
       <TabPage title="Tags" name="tags">
         <TagsTab/>
