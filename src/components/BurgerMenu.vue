@@ -29,7 +29,7 @@ watchEffect(async () => {
 </script>
 
 <template>
-  <div class="flex flex-col not-dark:bg-slate-100 dark:bg-slate-800 border-r not-dark:border-r-slate-200 dark:border-r-slate-600 p-2 gap-2 min-w-xs max-w-xs w-xs">
+  <div class="flex flex-col not-dark:bg-slate-100 dark:bg-slate-800 border-r not-dark:border-r-slate-200 dark:border-r-slate-600 p-2 gap-4 min-w-xs max-w-xs w-xs">
     <div class="flex items-center h-16 p-2 border-b not-dark:border-b-slate-200 dark:border-b-slate-600">
       <router-link v-if="route.params.tenant" :to="{name: 'home'}">
         <div class="flex flex-row items-center gap-2">
@@ -63,7 +63,7 @@ watchEffect(async () => {
       </BurgerMenuItem>
     </BurgerMenuItemGroup>
 
-    <div class="p-2 border-t not-dark:border-t-slate-200 dark:border-t-slate-600 mt-2">
+    <div class="p-2 border-t not-dark:border-t-slate-200 dark:border-t-slate-600">
       <div class="p-2 mt-2 not-dark:bg-offwhite dark:bg-slate-900 rounded-md flex flex-row items-center gap-2" v-if="user">
         <div class="rounded-full not-dark:bg-slate-200 dark:bg-slate-600 font-semibold text-sm justify-center items-center flex overflow-hidden size-12">
           <div class="flex items-center justify-center">

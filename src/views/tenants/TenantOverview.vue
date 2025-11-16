@@ -7,8 +7,11 @@ import DataList from "../../components/DataList.vue";
 import ButtonComponent from "../../components/ButtonComponent.vue";
 import TenantCreateModal from "./TenantCreateModal.vue";
 import {ref} from "vue";
+import {useRoute} from "vue-router";
 
-const dataQuery = () => useListTenantsQuery()
+const route = useRoute()
+
+const dataQuery = () => useListTenantsQuery(route.params.tenant)
 
 const createModal = ref(null)
 
