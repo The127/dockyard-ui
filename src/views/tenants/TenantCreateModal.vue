@@ -9,7 +9,9 @@ import InputComponent from "../../components/InputComponent.vue";
 import {useCreateTenantMutation} from "../../api/admin/tenants.js";
 import {useToast} from "../../composables/toast.js";
 import FormGroup from "../../components/FormGroup.vue";
+import {useRoute} from "vue-router";
 
+const route = useRoute()
 const toast = useToast()
 
 const modal = ref(null)
@@ -45,7 +47,9 @@ defineExpose({
   open,
 })
 
-const createTenantMutation = useCreateTenantMutation()
+const createTenantMutation = useCreateTenantMutation(
+    route.params.tenant,
+)
 
 const createTenant = async () => {
   try {
