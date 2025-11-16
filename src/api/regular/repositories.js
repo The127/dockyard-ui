@@ -12,7 +12,7 @@ export const listRepositoriesQueryFn = async (tenantSlug, projectSlug) => {
         ConfigApiUrl() + `/api/v1/tenants/${tenantSlug}/projects/${projectSlug}/repositories`
     )
 
-    return await apiFetch(url.toString())
+    return await apiFetch(url.toString(), tenantSlug)
 }
 
 export const useGetRepositoryQuery = (tenantSlug, projectSlug, repositorySlug) => useQuery({
@@ -25,7 +25,7 @@ export const getRepositoryQueryFn = async (tenantSlug, projectSlug, repositorySl
         ConfigApiUrl() + `/api/v1/tenants/${tenantSlug}/projects/${projectSlug}/repositories/${repositorySlug}`
     )
 
-    return await apiFetch(url.toString())
+    return await apiFetch(url.toString(), tenantSlug)
 }
 
 export const useCreateRepositoryMutation = (tenantSlug, projectSlug) => {
@@ -43,7 +43,7 @@ export const createRepositoryMutationFn = async (tenantSlug, projectSlug, data) 
         ConfigApiUrl() + `/api/v1/tenants/${tenantSlug}/projects/${projectSlug}/repositories`
     )
 
-    return await apiFetch(url.toString(), {
+    return await apiFetch(url.toString(), tenantSlug, {
         method: 'POST',
         body: data,
     })
@@ -59,7 +59,7 @@ export const getRepositoryReadmeQueryFn = async (tenantSlug, projectSlug, reposi
         ConfigApiUrl() + `/api/v1/tenants/${tenantSlug}/projects/${projectSlug}/repositories/${repositorySlug}/readme`
     )
 
-    return await apiFetch(url.toString())
+    return await apiFetch(url.toString(), tenantSlug)
 }
 
 export const useUpdateRepositoryReadmeMutation = (tenantSlug, projectSlug, repositorySlug) => {
@@ -77,7 +77,7 @@ export const updateRepositoryReadmeMutationFn = async (tenantSlug, projectSlug, 
         ConfigApiUrl() + `/api/v1/tenants/${tenantSlug}/projects/${projectSlug}/repositories/${repositorySlug}/readme`
     )
 
-    return await apiFetch(url.toString(), {
+    return await apiFetch(url.toString(), tenantSlug, {
         method: 'PUT',
         body: data,
     })

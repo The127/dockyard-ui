@@ -1,9 +1,12 @@
-export async function apiFetch(url, options = {}) {
-    const opts = { ...options }
+import {useRoute} from "vue-router";
+import {useUserManager} from "../composables/userManager.js";
+
+export async function apiFetch(url, tenant, options = {}) {
+    const opts = {...options}
     const method = (options.method || "GET").toUpperCase()
 
     opts.headers = {
-        ...(opts.headers  || {}),
+        ...(opts.headers || {}),
     }
 
     if (opts.body && ["POST", "PUT", "PATCH"].includes(method)) {
@@ -12,6 +15,12 @@ export async function apiFetch(url, options = {}) {
         }
 
         opts.headers["Content-Type"] = "application/json"
+    }
+
+    if (tenant) {
+        const userMgr = await useUserManager(tenant)
+        const user = await userMgr.getUser()
+        opts.headers["Authorization"] = "Bearer " + user.access_token
     }
 
     const response = await fetch(url, opts)

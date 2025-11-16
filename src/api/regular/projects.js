@@ -12,7 +12,7 @@ export const listProjectsQueryFn = async (tenantSlug) =>  {
         ConfigApiUrl() + `/api/v1/tenants/${tenantSlug}/projects`
     )
 
-    return await apiFetch(url.toString())
+    return await apiFetch(url.toString(), tenantSlug)
 }
 
 export const useGetProjectQuery = (tenantSlug, projectSlug) => useQuery({
@@ -25,7 +25,7 @@ export const getProjectQueryFn = async (tenantSlug, projectSlug) => {
         ConfigApiUrl() + `/api/v1/tenants/${tenantSlug}/projects/${projectSlug}`
     )
 
-    return await apiFetch(url.toString())
+    return await apiFetch(url.toString(), tenantSlug)
 }
 
 export const useCreateProjectMutation = (tenantSlug) => {
@@ -43,7 +43,7 @@ export const createProjectMutationFn = async (tenantSlug, data) => {
         ConfigApiUrl() + `/api/v1/tenants/${tenantSlug}/projects`
     )
 
-    return await apiFetch(url.toString(), {
+    return await apiFetch(url.toString(), tenantSlug, {
         method: 'POST',
         body: data,
     })

@@ -43,7 +43,7 @@ export const createTenantMutationFn = async (data) => {
         ConfigApiUrl() + `/admin/api/v1/tenants`
     )
 
-    return await apiFetch(url.toString(), {
+    return await apiFetch(url.toString(), "TODO", {
         method: 'POST',
         body: data,
     })

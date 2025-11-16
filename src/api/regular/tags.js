@@ -12,5 +12,5 @@ export const listTagsQueryFn = async (tenantSlug, projectSlug, repositorySlug) =
         ConfigApiUrl() + `/api/v1/tenants/${tenantSlug}/projects/${projectSlug}/repositories/${repositorySlug}/tags`
     )
 
-    return await apiFetch(url.toString())
+    return await apiFetch(url.toString(), tenantSlug)
 }
