@@ -5,12 +5,15 @@ import {useToast} from "../../../../composables/toast.js";
 import {useGetRepositoryReadmeQuery, useUpdateRepositoryReadmeMutation} from "../../../../api/regular/repositories.js";
 import {MdEditor, MdPreview} from 'md-editor-v3';
 import 'md-editor-v3/lib/style.css';
-import {markRaw, ref, useId} from "vue";
+import {computed, markRaw, ref, useId} from "vue";
 import ButtonComponent from "../../../../components/ButtonComponent.vue";
 import { Pencil } from "lucide-vue-next";
+import {useDark} from "@vueuse/core";
 
 const route = useRoute()
 const toast = useToast()
+
+const isDark = useDark()
 
 const editorId = useId()
 const viewerId = useId()
@@ -64,18 +67,22 @@ const decodedContent = (contentBase64) => {
   return new TextDecoder().decode(Uint8Array.fromBase64(contentBase64))
 }
 
+const editorTheme = computed(() => {
+  return isDark.value ? "dark" : "light"
+})
+
 </script>
 
 <template>
   <template v-if="editing">
-    <MdEditor :id="editorId" v-model="content" language="en-US"/>
+    <MdEditor  class="rounded-md" :id="editorId" v-model="content" language="en-US" :theme="editorTheme"/>
     <div class="flex flex-row gap-2">
       <ButtonComponent size="sm" text="Save" @click="onSaveReadme"/>
       <ButtonComponent size="sm" variant="secondary" text="Cancel" @click="onCancel"/>
     </div>
   </template>
   <template v-else-if="data?.contentBase64">
-    <MdPreview :id="viewerId" :modelValue="decodedContent(data.contentBase64)" language="en-US"/>
+    <MdPreview class="rounded-md" :id="viewerId" :modelValue="decodedContent(data.contentBase64)" language="en-US" :theme="editorTheme"/>
     <ButtonComponent variant="link" size="sm" text="Edit" @click="onEdit">
       <template #adornment>
         <Pencil class="size-4"/>
