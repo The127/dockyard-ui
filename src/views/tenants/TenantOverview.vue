@@ -29,7 +29,10 @@ const openCreateModal = () => {
     </PageHeader>
     <DataList :query="dataQuery">
       <template #row="{item}">
-        {{ item }}
+        <div class="flex flex-row gap-2 items-baseline">
+          <span class="font-semibold">{{ item.displayName}}</span>
+          <span class="font-light text-sm not-dark:text-slate-500 dark:text-slate-400">{{ item.slug}}</span>
+        </div>
       </template>
     </DataList>
   </PageLayout>
