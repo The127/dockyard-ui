@@ -4,13 +4,14 @@ import {useToast} from "../../composables/toast.js";
 import {reactive, ref, watchEffect} from "vue";
 import useVuelidate from "@vuelidate/core";
 import {useCreateProjectMutation} from "../../api/regular/projects.js";
-import {useRoute} from "vue-router";
+import {useRoute, useRouter} from "vue-router";
 import {required} from "@vuelidate/validators";
 import ModalPopup from "../../components/ModalPopup.vue";
 import FormComponent from "../../components/FormComponent.vue";
 import InputComponent from "../../components/InputComponent.vue";
 
 const route = useRoute()
+const router = useRouter()
 const toast = useToast()
 
 const modal = ref(null)
@@ -56,12 +57,17 @@ const createProject = async () => {
     })
 
     toast.success('Project created')
+
+    await router.push({
+      name: 'project-details',
+      params: {...route.params, project: formModel.slug},
+    })
   } catch (e) {
     console.error(e)
     toast.error('Failed to create project')
   }
 
-  modal.value.close()
+  modal?.value?.close()
 }
 
 </script>

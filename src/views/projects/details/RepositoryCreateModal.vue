@@ -1,6 +1,6 @@
 <script setup>
 
-import {useRoute} from "vue-router";
+import {useRoute, useRouter} from "vue-router";
 import {useToast} from "../../../composables/toast.js";
 import {reactive, ref} from "vue";
 import {required} from "@vuelidate/validators";
@@ -11,6 +11,7 @@ import FormComponent from "../../../components/FormComponent.vue";
 import InputComponent from "../../../components/InputComponent.vue";
 
 const route = useRoute()
+const router = useRouter()
 const toast = useToast()
 
 const modal = ref(null)
@@ -53,12 +54,17 @@ const createRepository = async () => {
     })
 
     toast.success('Repository created')
+
+    await router.push({
+      name: 'repository-details',
+      params: {...route.params, repository: formModel.slug,}
+    })
   }catch (e) {
     console.error(e)
     toast.error('Failed to create repository')
   }
 
-  modal.value.close()
+  modal?.value?.close()
 }
 
 </script>
