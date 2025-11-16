@@ -82,7 +82,7 @@ const editorTheme = computed(() => {
     </div>
   </template>
   <template v-else-if="data?.contentBase64">
-    <MdPreview class="rounded-md" :id="viewerId" :modelValue="decodedContent(data.contentBase64)" language="en-US" :theme="editorTheme"/>
+    <MdPreview class="rounded-md px-4" :id="viewerId" :modelValue="decodedContent(data.contentBase64)" language="en-US" :theme="editorTheme"/>
     <ButtonComponent variant="link" size="sm" text="Edit" @click="onEdit">
       <template #adornment>
         <Pencil class="size-4"/>
