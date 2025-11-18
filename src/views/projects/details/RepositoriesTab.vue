@@ -26,8 +26,9 @@ const navigateToRepository = (repository) => {
           <div class="flex flex-col gap-1">
             <span class="font-semibold">{{ item.displayName }}</span>
           </div>
-          <div>
-            TODO: stats
+          <div class="flex flex-col gap-1">
+            <span>public: {{ item.isPublic }}</span>
+            <span>TODO: stats</span>
           </div>
         </div>
         <div>

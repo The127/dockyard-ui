@@ -27,7 +27,7 @@ const { data } = useGetRepositoryQuery(
     />
     <TabLayout>
       <TabPage title="Overview" name="overview">
-        <OverviewTab/>
+        <OverviewTab :data="data"/>
       </TabPage>
       <TabPage title="Tags" name="tags">
         <TagsTab/>

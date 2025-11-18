@@ -18,10 +18,16 @@ const isDark = useDark()
 const editorId = useId()
 const viewerId = useId()
 
+defineProps({
+  data: {
+    required: true,
+  },
+})
+
 const editing = ref(false)
 const content = ref('#test')
 
-const {data} = useGetRepositoryReadmeQuery(
+const {readmeData} = useGetRepositoryReadmeQuery(
     route.params.tenant,
     route.params.project,
     route.params.repository,
@@ -54,10 +60,10 @@ const onCancel = () => {
 }
 
 const onEdit = () => {
-  if (!data?.value?.contentBase64) {
+  if (!readmeData?.value?.contentBase64) {
     content.value = ""
   }else{
-    content.value = decodedContent(data.value.contentBase64)
+    content.value = decodedContent(readmeData.value.contentBase64)
   }
 
   editing.value = true
@@ -74,6 +80,7 @@ const editorTheme = computed(() => {
 </script>
 
 <template>
+  isPublic: {{ data.isPublic }}
   <template v-if="editing">
     <MdEditor  class="rounded-md" :id="editorId" v-model="content" language="en-US" :theme="editorTheme"/>
     <div class="flex flex-row gap-2">
@@ -81,8 +88,10 @@ const editorTheme = computed(() => {
       <ButtonComponent size="sm" variant="secondary" text="Cancel" @click="onCancel"/>
     </div>
   </template>
-  <template v-else-if="data?.contentBase64">
-    <MdPreview class="rounded-md px-4" :id="viewerId" :modelValue="decodedContent(data.contentBase64)" language="en-US" :theme="editorTheme"/>
+  <template v-else-if="readmeData
+ ?.contentBase64">
+    <MdPreview class="rounded-md px-4" :id="viewerId" :modelValue="decodedContent(readmeData
+   .contentBase64)" language="en-US" :theme="editorTheme"/>
     <ButtonComponent variant="link" size="sm" text="Edit" @click="onEdit">
       <template #adornment>
         <Pencil class="size-4"/>
