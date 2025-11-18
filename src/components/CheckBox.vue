@@ -69,33 +69,6 @@ const hasError = computed(() => !!props.vuelidate && props.vuelidate.$error)
 </template>
 
 <style scoped>
-.slider {
-  position: relative;
-  display: inline-block;
-  width: 50px;
-  height: 28px;
-  background-color: #ccc;
-  border-radius: 28px;
-  transition: 0.3s;
-}
 
-.slider:before {
-  position: absolute;
-  content: "";
-  height: 22px;
-  width: 22px;
-  left: 3px;
-  bottom: 3px;
-  background-color: white;
-  transition: 0.3s;
-  border-radius: 50%;
-}
 
-input:checked + .slider {
-  background-color: #4caf50;
-}
-
-input:checked + .slider:before {
-  transform: translateX(22px);
-}
 </style>
