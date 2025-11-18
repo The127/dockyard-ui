@@ -80,7 +80,7 @@ const editorTheme = computed(() => {
 </script>
 
 <template>
-  isPublic: {{ data.isPublic }}
+  TODO: show data: {{ data }}
   <template v-if="editing">
     <MdEditor  class="rounded-md" :id="editorId" v-model="content" language="en-US" :theme="editorTheme"/>
     <div class="flex flex-row gap-2">

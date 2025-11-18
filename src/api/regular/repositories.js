@@ -52,7 +52,7 @@ export const createRepositoryMutationFn = async (tenantSlug, projectSlug, data) 
 export const usePatchRepositoryMutation = (tenantSlug, projectSlug, repositorySlug) => {
     const queryClient = useQueryClient()
     return useMutation({
-        mutationFn: (data) => updateRepositoryReadmeMutationFn(tenantSlug, projectSlug, repositorySlug, data),
+        mutationFn: (data) => patchRepositoryMutationFn(tenantSlug, projectSlug, repositorySlug, data),
         onSuccess: () => {
             queryClient.invalidateQueries(['repositories', tenantSlug, projectSlug, repositorySlug])
         },
