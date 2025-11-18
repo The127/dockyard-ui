@@ -49,6 +49,27 @@ export const createRepositoryMutationFn = async (tenantSlug, projectSlug, data) 
     })
 }
 
+export const usePatchRepositoryMutation = (tenantSlug, projectSlug, repositorySlug) => {
+    const queryClient = useQueryClient()
+    return useMutation({
+        mutationFn: (data) => updateRepositoryReadmeMutationFn(tenantSlug, projectSlug, repositorySlug, data),
+        onSuccess: () => {
+            queryClient.invalidateQueries(['repositories', tenantSlug, projectSlug, repositorySlug])
+        },
+    })
+}
+
+export const patchRepositoryMutationFn = async (tenantSlug, projectSlug, repositorySlug, data) => {
+    const url = new URL(
+        ConfigApiUrl() + `/api/v1/tenants/${tenantSlug}/projects/${projectSlug}/repositories/${repositorySlug}`
+    )
+
+    return await apiFetch(url.toString(), tenantSlug, {
+        method: 'PATCH',
+        body: data,
+    })
+}
+
 export const useGetRepositoryReadmeQuery = (tenantSlug, projectSlug, repositorySlug) => useQuery({
     queryKey: ['repository-readmes', tenantSlug, projectSlug, repositorySlug],
     queryFn: () =>  getRepositoryReadmeQueryFn(tenantSlug, projectSlug, repositorySlug)
