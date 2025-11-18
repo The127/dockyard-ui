@@ -20,7 +20,7 @@ const modal = ref(null)
 const formModel = reactive({
   slug: '',
   description: '',
-  isPublic: '',
+  isPublic: false,
 })
 
 const formRules = {
