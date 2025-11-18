@@ -9,6 +9,7 @@ import {useCreateRepositoryMutation} from "../../../api/regular/repositories.js"
 import ModalPopup from "../../../components/ModalPopup.vue";
 import FormComponent from "../../../components/FormComponent.vue";
 import InputComponent from "../../../components/InputComponent.vue";
+import CheckBox from "../../../components/CheckBox.vue";
 
 const route = useRoute()
 const router = useRouter()
@@ -19,11 +20,13 @@ const modal = ref(null)
 const formModel = reactive({
   slug: '',
   description: '',
+  isPublic: '',
 })
 
 const formRules = {
   slug: {required,},
   description: {},
+  isPublic: {},
 }
 
 const v$ = useVuelidate(formRules, formModel)
@@ -51,6 +54,7 @@ const createRepository = async () => {
     await createRepositoryMutation.mutateAsync({
       slug: formModel.slug,
       description: formModel.description,
+      isPublic: formModel.isPublic,
     })
 
     toast.success('Repository created')
@@ -89,6 +93,12 @@ const createRepository = async () => {
           v-model="v$.description.$model"
           :vuelidate="v$.description"
           helper-text="A short description of the repository."
+      />
+      <CheckBox
+          label="Public repository"
+          v-model="v$.isPublic.$model"
+          :vuelidate="v$.isPublic"
+          helper-text="If set to true the repository can be pulled without project access."
       />
     </FormComponent>
   </ModalPopup>
