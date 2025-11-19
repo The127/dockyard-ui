@@ -34,7 +34,9 @@ const openCreateModal = () => {
   </div>
   <DataList :query="dataQuery">
     <template #row="{item}">
-      {{ item }}
+      <div>
+        {{ item.displayName }}
+      </div>
     </template>
   </DataList>
 </template>
