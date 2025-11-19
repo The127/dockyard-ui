@@ -24,8 +24,8 @@ const openCreateModal = () => {
 
   <div class="flex flex-col gap-3 justify-between">
     <p>
-      PATs (or Personal Access Tokens) are a form of authentication.
-      You use them to authenticate in your docker or podman client to authenticate against dockyard for push or pull
+      PATs (Personal Access Tokens) are a form of authentication.
+      You use them to login via docker or podman against dockyard for push or pull
       operations (e.g. via <code>podman login</code>).
     </p>
     <div>
