@@ -31,6 +31,8 @@ const formRules = {
 const v$ = useVuelidate(formRules, formModel)
 
 const open = () => {
+  token.value = null
+
   formModel.displayName = ''
 
   v$.value.$reset()
@@ -62,7 +64,7 @@ const createPat = async () => {
 
 const copyAndClose = async () => {
   clipboard.writeText(token.value, 'PAT')
-  token.value = ''
+  token.value = null
   modal?.value?.close()
 }
 
@@ -91,7 +93,7 @@ const copyAndClose = async () => {
       <span>This is the only time we will show you your PAT. Make sure to save it securely somewhere.</span>
       <div class="p-1 rounded-md not-dark:bg-slate-100 dark:bg-slate-800">
         <Terminal class="size-6"/>
-        <code class="p-1 rounded-md w-full wrap-break-word">
+        <code class="w-full break-all">
           {{ token }}
         </code>
       </div>
