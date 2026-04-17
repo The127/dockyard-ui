@@ -33,7 +33,7 @@ const imagePath = computed(() =>
   `${registryHost.value}/${route.params.project}/${route.params.repository}`
 )
 
-const loginCommand = computed(() => `${selectedTool.value} login ${registryHost.value}`)
+const loginCommand = computed(() => `${selectedTool.value} login ${route.params.tenant}.${registryHost.value}`)
 const pullCommand = computed(() => `${selectedTool.value} pull ${imagePath.value}:<tag>`)
 const pushCommand = computed(() => `${selectedTool.value} push ${imagePath.value}:<tag>`)
 
