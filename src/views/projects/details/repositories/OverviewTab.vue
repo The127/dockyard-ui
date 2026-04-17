@@ -30,7 +30,7 @@ const registryHost = computed(() => {
 })
 
 const imagePath = computed(() =>
-  `${registryHost.value}/${route.params.project}/${route.params.repository}`
+  `${route.params.tenant}.${registryHost.value}/${route.params.project}/${route.params.repository}`
 )
 
 const loginCommand = computed(() => `${selectedTool.value} login ${route.params.tenant}.${registryHost.value}`)
